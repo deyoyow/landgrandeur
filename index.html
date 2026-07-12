@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PT. Maju Bangun Sinergi — Engineering, Design &amp; Digital</title>
+<meta name="description" content="Multidisciplinary engineering in Indonesia: civil & structural, MEP, interior & exterior design, and industrial digital systems — concept to handover.">
+<link rel="canonical" href="https://majubangunsinergi.com/">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PT. Maju Bangun Sinergi">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="PT. Maju Bangun Sinergi — Engineering, Design & Digital">
+<meta property="og:description" content="Civil, mechanical & electrical engineering, interior & exterior design, and industrial digital solutions — one team, from first sketch to final handover.">
+<meta property="og:url" content="https://majubangunsinergi.com/">
+<meta property="og:image" content="https://majubangunsinergi.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Maju Bangun Sinergi — engineering drawing-sheet cover over a night skyline">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0B0E13">
+<script>document.documentElement.classList.add("js");</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "PT. Maju Bangun Sinergi",
+  "alternateName": "MBS",
+  "url": "https://majubangunsinergi.com/",
+  "foundingDate": "2023",
+  "description": "Multidisciplinary engineering company: civil, mechanical and electrical engineering, interior and exterior design, and industrial digital solutions.",
+  "logo": "https://majubangunsinergi.com/assets/logo-512.png",
+  "email": "sales@majubangunsinergi.com",
+  "telephone": "+6285280448499",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Jl. Raffles Hills Boulevard No. 23, Sukatani, Kec. Tapos",
+    "addressLocality": "Depok",
+    "addressRegion": "Jawa Barat",
+    "addressCountry": "ID"
+  }
+}
+</script>
+<style>
+/* ============================================================
+   PT. MAJU BANGUN SINERGI — "General Arrangement"
+   The page is set like an engineering drawing sheet, at night.
+   ============================================================ */
+
+@font-face{
+  font-family:'Archivo';
+  src:url('assets/fonts/archivo-var.woff2') format('woff2-variations');
+  font-weight:100 900;
+  font-stretch:62% 125%;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'JetBrains Mono';
+  src:url('assets/fonts/jetbrains-mono-var.woff2') format('woff2-variations');
+  font-weight:400 600;
+  font-style:normal;
+  font-display:swap;
+}
+
+:root{
+  /* Night-drawing palette */
+  --ink:#0B0E13;        /* ground — night sky            */
+  --iron:#12161F;       /* raised surfaces               */
+  --iron-2:#171C27;     /* hover surfaces                */
+  --line:#232B3A;       /* drafting hairlines            */
+  --line-soft:#1A202C;  /* faint hairlines               */
+  --zinc:#A9B2C3;       /* secondary text (blue-biased)  */
+  --zinc-dim:#7A8496;   /* tertiary / annotations (AA on ink & iron) */
+  --paper:#EEF0F5;      /* primary text                  */
+  --amber:#F5B301;      /* the accent — from the logo    */
+  --amber-soft:rgba(245,179,1,.14);
+  --amber-glow:rgba(245,179,1,.32);
+
+  --font-body:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --frame:18px;         /* drawing-sheet frame inset     */
+  --gutter:clamp(20px,5vw,72px);
+  --maxw:1280px;
+  --ease:cubic-bezier(.22,.7,.16,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html:focus-within{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--amber);color:var(--ink)}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px}
+
+.skip-link{
+  position:fixed;top:-60px;left:24px;z-index:200;
+  background:var(--amber);color:var(--ink);
+  padding:10px 18px;font-family:var(--font-mono);font-size:13px;
+  transition:top .2s var(--ease);
+}
+.skip-link:focus{top:12px}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+
+/* ---------- mono annotation utility ---------- */
+.mono{
+  font-family:var(--font-mono);
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--zinc-dim);
+}
+.mono b{color:var(--amber);font-weight:500}
+
+/* ---------- drawing-sheet frame ---------- */
+.sheet-frame{position:fixed;inset:0;z-index:70;pointer-events:none}
+.sheet-frame .edge{position:absolute;background:var(--line)}
+.sheet-frame .e-t{top:var(--frame);left:var(--frame);right:var(--frame);height:1px}
+.sheet-frame .e-b{bottom:var(--frame);left:var(--frame);right:var(--frame);height:1px}
+.sheet-frame .e-l{left:var(--frame);top:var(--frame);bottom:var(--frame);width:1px}
+.sheet-frame .e-r{right:var(--frame);top:var(--frame);bottom:var(--frame);width:1px}
+.sheet-frame .tick{position:absolute;width:9px;height:9px;border:1px solid var(--zinc-dim)}
+.sheet-frame .tick{border-right:0;border-bottom:0}
+.sheet-frame .t-tl{top:calc(var(--frame) - 4px);left:calc(var(--frame) - 4px)}
+.sheet-frame .t-tr{top:calc(var(--frame) - 4px);right:calc(var(--frame) - 4px);transform:rotate(90deg)}
+.sheet-frame .t-br{bottom:calc(var(--frame) - 4px);right:calc(var(--frame) - 4px);transform:rotate(180deg)}
+.sheet-frame .t-bl{bottom:calc(var(--frame) - 4px);left:calc(var(--frame) - 4px);transform:rotate(270deg)}
+.sheet-frame .cap{
+  position:absolute;font-family:var(--font-mono);font-size:9px;
+  letter-spacing:.22em;color:var(--zinc-dim);text-transform:uppercase;
+  background:var(--ink);padding:0 10px;white-space:nowrap;
+}
+.sheet-frame .cap-l{left:var(--frame);top:50%;transform:rotate(180deg) translateX(50%);writing-mode:vertical-rl;padding:10px 0;margin-left:-4px}
+.sheet-frame .cap-r{right:var(--frame);top:50%;transform:translateX(50%) rotate(0);writing-mode:vertical-rl;padding:10px 0;margin-right:-4px}
+.sheet-frame .cap-b{bottom:calc(var(--frame) - 6px);left:50%;transform:translateX(-50%)}
+@media (max-width:860px){
+  :root{--frame:10px}
+  .sheet-frame .cap{display:none}
+}
+
+/* ---------- grain ---------- */
+.grain{
+  position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- header ---------- */
+.site-head{
+  position:fixed;top:0;left:0;right:0;z-index:80;
+  padding:calc(var(--frame) + 10px) calc(var(--frame) + 16px) 10px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  transition:background .35s var(--ease),box-shadow .35s var(--ease),padding .35s var(--ease);
+}
+.site-head.scrolled{
+  background:rgba(11,14,19,.82);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 var(--line);
+  padding-top:12px;padding-bottom:12px;
+}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand .logo{height:42px;width:auto;flex:none}
+.brand-name{display:flex;flex-direction:column;gap:2px;line-height:1}
+.brand-name .nm{
+  font-weight:750;font-stretch:118%;font-size:13.5px;letter-spacing:.1em;
+}
+.brand-name .sub{font-family:var(--font-mono);font-size:8.5px;letter-spacing:.3em;color:var(--zinc-dim)}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{
+  font-family:var(--font-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--zinc);position:relative;padding:6px 0;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+  background:var(--amber);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s var(--ease);
+}
+.nav-links a:hover{color:var(--paper)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{
+  font-family:var(--font-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);background:var(--amber);padding:11px 20px;
+  display:inline-flex;align-items:center;gap:8px;font-weight:600;
+  transition:box-shadow .3s var(--ease),transform .3s var(--ease);
+}
+.nav-cta:hover{box-shadow:0 0 0 1px var(--amber),0 6px 28px var(--amber-glow);transform:translateY(-1px)}
+.menu-btn{display:none;position:relative;z-index:110;width:44px;height:44px;flex:none}
+.menu-btn span{
+  position:absolute;left:10px;right:10px;height:2px;background:var(--paper);
+  transition:transform .3s var(--ease),opacity .3s var(--ease);
+}
+.menu-btn span:nth-child(1){top:16px}
+.menu-btn span:nth-child(2){top:22px}
+.menu-btn span:nth-child(3){top:28px}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed;inset:0;z-index:100;background:rgba(11,14,19,.97);
+  display:flex;flex-direction:column;justify-content:center;padding:96px 32px 48px;
+  overflow-y:auto;
+  opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s;
+}
+.mobile-menu.open{opacity:1;visibility:visible}
+.mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.mobile-menu a{
+  font-weight:780;font-stretch:120%;font-size:clamp(34px,9vw,54px);
+  text-transform:uppercase;letter-spacing:.01em;line-height:1.15;
+  color:var(--paper);display:flex;align-items:baseline;gap:16px;
+}
+.mobile-menu a .idx{font-family:var(--font-mono);font-size:12px;color:var(--amber);font-weight:400}
+.mobile-menu .mm-foot{margin-top:48px}
+
+@media (max-width:960px){
+  .nav-links,.nav-cta{display:none}
+  .menu-btn{display:block}
+}
+@media (max-width:560px){
+  .brand-name .sub{display:none}
+  .brand-name .nm{font-size:12.5px}
+}
+
+/* ---------- layout helpers ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+section{position:relative}
+
+/* dimension-line divider */
+.dim{
+  display:flex;align-items:center;gap:14px;
+  max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter);
+}
+.dim .rule{flex:1;height:1px;background:var(--line);position:relative}
+.dim .rule::before,.dim .rule::after{
+  content:"";position:absolute;top:-4px;width:1px;height:9px;background:var(--line);
+}
+.dim .rule::before{left:0}
+.dim .rule::after{right:0}
+.dim .lab{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;color:var(--zinc-dim);text-transform:uppercase;white-space:nowrap}
+
+/* section head */
+.sheet-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(40px,6vw,72px)}
+.sheet-head .sh-left .mono{display:block;margin-bottom:18px}
+.sheet-head h2{
+  font-weight:790;font-stretch:122%;text-transform:uppercase;
+  font-size:clamp(30px,5.2vw,58px);line-height:1.02;letter-spacing:-.005em;
+  text-wrap:balance;
+}
+.sheet-head h2 em{font-style:normal;color:var(--amber)}
+.sheet-head .sh-right{text-align:right;padding-bottom:8px;flex:none}
+@media (max-width:720px){.sheet-head{flex-direction:column;align-items:flex-start}.sheet-head .sh-right{text-align:left}}
+
+/* reveal-on-scroll — gated behind .js so content never hides without JS */
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* ============================================================
+   HERO — night skyline under a drafting grid
+   ============================================================ */
+.hero{
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;overflow:hidden;
+  padding-top:104px;
+}
+.hero-sky{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(120% 65% at 50% 108%, rgba(245,179,1,.10) 0%, rgba(245,179,1,.03) 38%, transparent 62%),
+    linear-gradient(180deg,#07090D 0%,#0B0E13 42%,#10141D 78%,#12161F 100%);
+}
+.hero-grid{
+  position:absolute;inset:0;z-index:1;opacity:.5;
+  background-image:
+    linear-gradient(rgba(169,178,195,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(169,178,195,.055) 1px,transparent 1px);
+  background-size:72px 72px;
+  -webkit-mask-image:radial-gradient(90% 80% at 50% 30%,#000 0%,transparent 82%);
+  mask-image:radial-gradient(90% 80% at 50% 30%,#000 0%,transparent 82%);
+}
+.hero canvas{position:absolute;left:0;bottom:0;width:100%;z-index:2;pointer-events:none}
+#sky-far{height:88%;z-index:2}
+#sky-mid{height:74%;z-index:3}
+#sky-near{height:62%;z-index:4}
+.hero-fade{
+  position:absolute;left:0;right:0;bottom:0;height:120px;z-index:5;pointer-events:none;
+  background:linear-gradient(180deg,transparent, rgba(7,9,13,.72));
+}
+
+.hero-inner{
+  position:relative;z-index:6;
+  max-width:var(--maxw);margin:0 auto;width:100%;
+  padding:0 var(--gutter) clamp(36px,6vh,72px);
+}
+.hero-tag{margin-bottom:clamp(18px,3vh,36px);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hero-tag .dash{width:44px;height:1px;background:var(--amber)}
+.headline{list-style:none}
+.headline li{
+  display:flex;align-items:baseline;gap:clamp(14px,3vw,36px);
+  border-bottom:1px solid var(--line-soft);
+  padding:clamp(2px,.6vh,8px) 0;
+}
+.headline li:last-child{border-bottom:0}
+.headline .word{
+  font-weight:800;font-stretch:125%;text-transform:uppercase;
+  font-size:clamp(48px,10.5vw,120px);line-height:1.04;letter-spacing:-.01em;
+  white-space:nowrap;
+}
+.headline li:nth-child(3) .word{color:var(--amber);text-shadow:0 0 90px var(--amber-glow)}
+.headline .gloss{
+  font-family:var(--font-mono);font-size:clamp(10px,1.2vw,13px);
+  letter-spacing:.18em;color:var(--zinc-dim);text-transform:uppercase;white-space:nowrap;
+  margin-left:auto;
+}
+.headline .gloss b{color:var(--zinc);font-weight:400}
+
+.hero-cols{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:40px;margin-top:clamp(28px,5vh,52px);
+  position:relative;
+}
+/* legibility floor over the skyline canvases */
+.hero-cols::before{
+  content:"";position:absolute;inset:-30px -40px -26px;z-index:-1;pointer-events:none;
+  background:radial-gradient(130% 150% at 22% 55%, rgba(7,9,13,.82), rgba(7,9,13,.42) 52%, transparent 80%);
+}
+.hero-lede{max-width:52ch;color:var(--zinc);font-size:clamp(15px,1.35vw,18px);line-height:1.7;font-weight:430}
+.hero-lede strong{color:var(--paper);font-weight:600}
+.hero-actions{display:flex;gap:14px;flex:none;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  padding:16px 26px;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s var(--ease),color .3s var(--ease);
+}
+.btn svg{width:14px;height:14px;flex:none;transition:transform .3s var(--ease)}
+.btn-solid{background:var(--amber);color:var(--ink)}
+.btn-solid:hover{transform:translateY(-2px);box-shadow:0 10px 34px var(--amber-glow)}
+.btn-solid:hover svg{transform:translate(2px,-2px)}
+.btn-ghost{border:1px solid #39435A;color:var(--zinc);background:rgba(11,14,19,.75)}
+.btn-ghost:hover{border-color:var(--zinc-dim);color:var(--paper);transform:translateY(-2px)}
+
+.hero-meta{
+  position:relative;z-index:6;
+  border-top:1px solid var(--line-soft);
+  background:rgba(7,9,13,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+}
+.hero-meta .wrap{
+  display:flex;justify-content:space-between;gap:18px;
+  padding-top:16px;padding-bottom:calc(16px + var(--frame));flex-wrap:wrap;
+}
+@media (max-width:900px){
+  .hero-cols{flex-direction:column;align-items:flex-start}
+  .headline .word{font-size:clamp(44px,13vw,96px)}
+}
+@media (max-width:760px){
+  .headline li{flex-direction:column;align-items:flex-start;gap:2px;padding:8px 0}
+  .headline .gloss{margin-left:2px}
+  .hero-tag .tag-x{display:none}
+  .hero-meta .m-x{display:none}
+}
+/* interaction hints that only make sense with a pointer */
+@media (hover:none),(max-width:820px){
+  .sh-hint{display:none}
+}
+
+/* hero load-in choreography */
+.hl-anim .headline .word,.hl-anim .headline .gloss,.hl-anim .hero-tag,.hl-anim .hero-lede,.hl-anim .hero-actions{
+  opacity:0;transform:translateY(34px);
+}
+.hl-anim.loaded .headline .word,.hl-anim.loaded .headline .gloss,.hl-anim.loaded .hero-tag,.hl-anim.loaded .hero-lede,.hl-anim.loaded .hero-actions{
+  opacity:1;transform:none;
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+}
+.hl-anim.loaded .headline li:nth-child(1) .word{transition-delay:.05s}
+.hl-anim.loaded .headline li:nth-child(2) .word{transition-delay:.16s}
+.hl-anim.loaded .headline li:nth-child(3) .word{transition-delay:.27s}
+.hl-anim.loaded .headline .gloss{transition-delay:.55s}
+.hl-anim.loaded .hero-tag{transition-delay:0s}
+.hl-anim.loaded .hero-lede{transition-delay:.45s}
+.hl-anim.loaded .hero-actions{transition-delay:.55s}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marquee{
+  border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
+  overflow:hidden;padding:18px 0;position:relative;background:var(--ink);
+}
+.marquee .track{display:flex;gap:0;width:max-content;animation:marq 46s linear infinite}
+.marquee ul{display:flex;list-style:none;gap:0;align-items:center}
+.marquee li{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--zinc-dim);display:flex;align-items:center;gap:0;white-space:nowrap;
+}
+.marquee li::after{content:"";width:7px;height:7px;margin:0 28px;background:var(--amber);opacity:.75;
+  clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   ABOUT — the name is the method
+   ============================================================ */
+.about{padding:clamp(90px,13vw,170px) 0 clamp(80px,10vw,140px)}
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,90px);align-items:center}
+.about-copy .lede{
+  font-size:clamp(19px,2vw,26px);line-height:1.5;font-weight:500;color:var(--paper);
+  text-wrap:balance;margin-bottom:28px;
+}
+.about-copy .lede em{font-style:normal;color:var(--amber)}
+.about-copy p{color:var(--zinc);max-width:58ch;margin-bottom:18px;font-size:15.5px}
+.about-defs{display:flex;flex-direction:column;gap:0;margin:34px 0 0;border-top:1px solid var(--line)}
+.about-defs .def{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}
+.about-defs .w{font-weight:760;font-stretch:120%;text-transform:uppercase;font-size:17px;letter-spacing:.02em}
+.about-defs .m{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.08em;color:var(--zinc-dim);align-self:center}
+.about-defs .m b{color:var(--zinc);font-weight:400}
+
+/* exploded logo with drawing callouts */
+.logo-plate{position:relative;padding:clamp(10px,3vw,30px)}
+.logo-plate .plate-svg{width:100%;height:auto}
+.callout-line{stroke:var(--zinc-dim);stroke-width:1;fill:none}
+.callout-dot{fill:var(--amber)}
+.callout-txt{font-family:var(--font-mono);font-size:7.5px;letter-spacing:.16em;fill:var(--zinc);text-transform:uppercase}
+.callout-sub{font-family:var(--font-mono);font-size:5.8px;letter-spacing:.14em;fill:var(--zinc-dim)}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr}.logo-plate{max-width:440px;margin:0 auto}}
+
+/* ============================================================
+   SERVICES — four petals, four pillars
+   ============================================================ */
+.services{padding:clamp(80px,11vw,150px) 0}
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.svc{
+  background:var(--iron);padding:clamp(26px,3.4vw,44px);
+  position:relative;transition:background .35s var(--ease);
+  display:flex;flex-direction:column;gap:18px;min-height:100%;
+}
+.svc:hover{background:var(--iron-2)}
+.svc-top{display:flex;justify-content:space-between;align-items:center}
+.svc-code{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;color:var(--zinc-dim)}
+.svc-code b{color:var(--amber);font-weight:500}
+.svc-icon{width:46px;height:46px;color:var(--zinc)}
+.svc:hover .svc-icon{color:var(--amber)}
+.svc-icon svg{width:100%;height:100%;transition:color .35s var(--ease)}
+.svc h3{
+  font-weight:740;font-stretch:116%;text-transform:uppercase;
+  font-size:clamp(19px,1.9vw,25px);line-height:1.15;letter-spacing:.01em;
+}
+.svc p{color:var(--zinc);font-size:14.5px;max-width:46ch}
+.svc ul{list-style:none;margin-top:auto;padding-top:10px;display:flex;flex-direction:column;gap:8px}
+.svc li{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--zinc-dim);display:flex;gap:10px;align-items:center;
+}
+.svc li::before{content:"";width:12px;height:1px;background:var(--amber);flex:none;opacity:.8}
+/* the 4th pillar takes the amber petal — like the logo */
+.svc.svc-amber{background:linear-gradient(150deg,#231B02, #1A1503 55%, var(--iron))}
+.svc.svc-amber:hover{background:linear-gradient(150deg,#2B2103,#1E1804 55%,var(--iron-2))}
+.svc.svc-amber .svc-icon{color:var(--amber)}
+
+/* CV detection-box hover — a nod to machine vision work */
+.svc .det{position:absolute;inset:10px;pointer-events:none;opacity:0;transition:opacity .3s var(--ease)}
+.svc:hover .det,.svc:focus-within .det,.svc:active .det{opacity:1}
+.svc .det i{position:absolute;width:16px;height:16px;border:2px solid var(--amber)}
+.svc .det i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}
+.svc .det i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
+.svc .det i:nth-child(3){bottom:0;right:0;border-left:0;border-top:0}
+.svc .det i:nth-child(4){bottom:0;left:0;border-right:0;border-top:0}
+.svc .det .det-lab{
+  position:absolute;top:-1px;left:22px;
+  font-family:var(--font-mono);font-size:9.5px;letter-spacing:.12em;
+  color:var(--ink);background:var(--amber);padding:3px 8px;font-weight:600;
+}
+@media (max-width:820px){.svc-grid{grid-template-columns:1fr}}
+
+/* ============================================================
+   APPROACH — dimension-chain of phases
+   ============================================================ */
+.approach{padding:clamp(80px,11vw,150px) 0}
+.phase-rail{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(16px,2vw,28px)}
+.phase-rail::before{
+  content:"";position:absolute;top:5px;left:0;right:0;height:1px;background:var(--line);
+}
+.phase{position:relative;padding-top:34px}
+.phase::before{
+  content:"";position:absolute;top:0;left:0;width:11px;height:11px;
+  background:var(--ink);border:1px solid var(--zinc-dim);transform:rotate(45deg);
+  transition:background .3s var(--ease),border-color .3s var(--ease);
+}
+.phase:hover::before{background:var(--amber);border-color:var(--amber)}
+.phase .ph-code{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;color:var(--amber);display:block;margin-bottom:10px}
+.phase h3{font-weight:720;font-stretch:112%;text-transform:uppercase;font-size:16.5px;letter-spacing:.03em;margin-bottom:10px;line-height:1.25}
+.phase p{color:var(--zinc-dim);font-size:13.5px;line-height:1.6;max-width:30ch}
+@media (max-width:1000px){
+  .phase-rail{grid-template-columns:1fr;gap:0}
+  .phase-rail::before{top:0;bottom:0;left:5px;right:auto;width:1px;height:auto}
+  .phase{padding:0 0 34px 34px}
+  .phase:last-child{padding-bottom:0}
+  .phase::before{left:0;top:4px}
+  .phase p{max-width:56ch}
+}
+
+/* ============================================================
+   FACTS STRIP — title-block cells
+   ============================================================ */
+.facts{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--iron)}
+.facts .wrap{display:grid;grid-template-columns:repeat(4,1fr);padding:0}
+.fact{
+  padding:clamp(22px,3vw,34px) clamp(18px,2.4vw,34px);
+  border-left:1px solid var(--line);
+}
+.fact:first-child{border-left:0}
+.fact .k{font-family:var(--font-mono);font-size:10px;letter-spacing:.24em;color:var(--zinc-dim);text-transform:uppercase;display:block;margin-bottom:10px}
+.fact .v{font-weight:760;font-stretch:118%;font-size:clamp(17px,1.8vw,24px);text-transform:uppercase;letter-spacing:.01em;line-height:1.2}
+.fact .v em{font-style:normal;color:var(--amber)}
+@media (max-width:820px){
+  .facts .wrap{grid-template-columns:1fr 1fr}
+  .fact:nth-child(3){border-left:0}
+  .fact{border-top:1px solid var(--line)}
+  .fact:nth-child(-n+2){border-top:0}
+}
+
+/* ============================================================
+   CTA BAND
+   ============================================================ */
+.cta-band{padding:clamp(100px,14vw,190px) 0;text-align:center;position:relative;overflow:hidden}
+.cta-band .halo{
+  position:absolute;left:50%;top:50%;width:min(900px,160vw);height:min(900px,160vw);transform:translate(-50%,-50%);
+  background:radial-gradient(circle,var(--amber-soft),transparent 60%);pointer-events:none;
+}
+.cta-band .mono{display:block;margin-bottom:22px}
+.cta-band h2{
+  font-weight:800;font-stretch:124%;text-transform:uppercase;
+  font-size:clamp(38px,7.5vw,96px);line-height:1;letter-spacing:-.01em;
+  margin-bottom:18px;text-wrap:balance;position:relative;
+}
+.cta-band h2 em{font-style:normal;color:var(--amber)}
+.cta-band p{color:var(--zinc);max-width:52ch;margin:0 auto 40px;position:relative}
+.cta-band .btn{position:relative}
+
+/* ============================================================
+   CONTACT — the title block
+   ============================================================ */
+.contact{padding:0 0 clamp(90px,12vw,160px)}
+.tblock{border:1px solid var(--line);background:var(--iron);display:grid;grid-template-columns:1.25fr .75fr}
+.tb-form{padding:clamp(26px,3.6vw,48px);border-right:1px solid var(--line)}
+.tb-form h3{font-weight:760;font-stretch:118%;text-transform:uppercase;font-size:clamp(20px,2.2vw,28px);margin-bottom:8px}
+.tb-form .hint{color:var(--zinc-dim);font-size:14px;margin-bottom:30px;max-width:48ch}
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.field label{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--zinc-dim)}
+.field input,.field textarea{
+  background:var(--ink);border:1px solid var(--line);color:var(--paper);
+  font-family:var(--font-body);font-size:16px;padding:13px 14px;border-radius:0;
+  transition:border-color .25s var(--ease);width:100%;
+}
+.field textarea{min-height:120px;resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--amber)}
+.field input::placeholder,.field textarea::placeholder{color:#7A8496}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.tb-form .btn{margin-top:6px}
+.form-note{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;color:var(--zinc-dim);margin-top:16px}
+
+.tb-info{display:flex;flex-direction:column}
+.tb-cell{padding:20px clamp(20px,2.6vw,32px);border-bottom:1px solid var(--line)}
+.tb-cell:last-child{border-bottom:0;margin-top:auto}
+.tb-cell .k{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.24em;color:var(--zinc-dim);text-transform:uppercase;display:block;margin-bottom:7px}
+.tb-cell .v{font-size:15px;font-weight:560;letter-spacing:.02em}
+.tb-cell .v.mono-v{font-family:var(--font-mono);font-size:13px;font-weight:400;color:var(--zinc)}
+.tb-cell a.v{display:inline-block;padding:8px 0;margin:-8px 0}
+.tb-cell a.v:hover{color:var(--amber)}
+/* hatched filler — drafting convention for an unused title-block field */
+.tb-fill{
+  flex:1;min-height:44px;border-bottom:1px solid var(--line);
+  background:repeating-linear-gradient(45deg,transparent 0 9px,var(--line-soft) 9px 10px);
+}
+.tb-stamp{display:flex;align-items:center;gap:14px;padding:22px clamp(20px,2.6vw,32px)}
+.tb-stamp .logo{height:54px;width:auto;flex:none}
+.tb-stamp .st-txt{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.18em;color:var(--zinc-dim);text-transform:uppercase;line-height:1.8}
+@media (max-width:900px){
+  .tblock{grid-template-columns:1fr}
+  .tb-form{border-right:0;border-bottom:1px solid var(--line)}
+  .f-row{grid-template-columns:1fr}
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-foot{border-top:1px solid var(--line);padding:34px 0 calc(26px + var(--frame))}
+.site-foot .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot-brand{display:flex;align-items:center;gap:12px}
+.foot-brand .logo{height:34px;width:auto}
+.foot-links{display:flex;gap:26px;list-style:none;flex-wrap:wrap}
+.foot-links a{
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--zinc-dim);
+  display:inline-block;padding:12px 4px;margin:-12px -4px;
+}
+.foot-links a:hover{color:var(--amber)}
+
+/* ============================================================
+   MOTION SAFETY
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .marquee .track{animation:none}
+  .js .reveal{opacity:1;transform:none}
+  .hl-anim .headline .word,.hl-anim .headline .gloss,.hl-anim .hero-tag,.hl-anim .hero-lede,.hl-anim .hero-actions{opacity:1;transform:none}
+}
+
+/* ============================================================
+   PRINT — the drawing goes back on paper
+   ============================================================ */
+@media print{
+  :root{
+    --ink:#fff;--iron:#fff;--iron-2:#fff;--line:#999;--line-soft:#ccc;
+    --zinc:#333;--zinc-dim:#555;--paper:#111;--amber:#7A5D00;
+    --amber-soft:transparent;--amber-glow:transparent;
+  }
+  body{background:#fff}
+  .sheet-frame,.grain,.site-head,.mobile-menu,.marquee,.hero-sky,.hero-grid,
+  .hero canvas,.hero-fade,.cta-band,.det,.skip-link{display:none!important}
+  .hero{min-height:0;padding-top:24px}
+  .hero-meta{background:none}
+  .hero-cols::before{display:none}
+  .headline li:nth-child(3) .word{text-shadow:none}
+  .js .reveal,.hl-anim .headline .word,.hl-anim .headline .gloss,
+  .hl-anim .hero-tag,.hl-anim .hero-lede,.hl-anim .hero-actions{opacity:1!important;transform:none!important}
+  .svc.svc-amber{background:#fff}
+  .btn{border:1px solid #111;background:none;color:#111}
+  section,.tblock{break-inside:avoid-page}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- SVG defs: the MBS mark, recreated as a four-petal symbol -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mbs-logo" viewBox="0 0 100 100">
+      <!-- top-left petal — M -->
+      <mask id="m-tl"><path fill="#fff" d="M0 18 Q0 0 18 0 L40 0 Q47 0 47 7 L47 40 Q47 47 40 47 L7 47 Q0 47 0 40 Z"/>
+        <text x="23.5" y="24" text-anchor="middle" dominant-baseline="central" font-family="Archivo,system-ui,sans-serif" font-weight="800" font-size="26" fill="#000">M</text></mask>
+      <path fill="currentColor" mask="url(#m-tl)" d="M0 18 Q0 0 18 0 L40 0 Q47 0 47 7 L47 40 Q47 47 40 47 L7 47 Q0 47 0 40 Z"/>
+      <!-- top-right petal — B -->
+      <mask id="m-tr"><path fill="#fff" d="M53 7 Q53 0 60 0 L82 0 Q100 0 100 18 L100 40 Q100 47 93 47 L60 47 Q53 47 53 40 Z"/>
+        <text x="76.5" y="24" text-anchor="middle" dominant-baseline="central" font-family="Archivo,system-ui,sans-serif" font-weight="800" font-size="26" fill="#000">B</text></mask>
+      <path fill="currentColor" mask="url(#m-tr)" d="M53 7 Q53 0 60 0 L82 0 Q100 0 100 18 L100 40 Q100 47 93 47 L60 47 Q53 47 53 40 Z"/>
+      <!-- bottom-left petal — S -->
+      <mask id="m-bl"><path fill="#fff" d="M0 60 Q0 53 7 53 L40 53 Q47 53 47 60 L47 93 Q47 100 40 100 L18 100 Q0 100 0 82 Z"/>
+        <text x="23.5" y="77" text-anchor="middle" dominant-baseline="central" font-family="Archivo,system-ui,sans-serif" font-weight="800" font-size="26" fill="#000">S</text></mask>
+      <path fill="currentColor" mask="url(#m-bl)" d="M0 60 Q0 53 7 53 L40 53 Q47 53 47 60 L47 93 Q47 100 40 100 L18 100 Q0 100 0 82 Z"/>
+      <!-- bottom-right petal — the amber flange -->
+      <mask id="m-br"><path fill="#fff" d="M53 60 Q53 53 60 53 L93 53 Q100 53 100 60 L100 82 Q100 100 82 100 L60 100 Q53 100 53 93 Z"/>
+        <circle cx="74" cy="74" r="8.5" fill="#000"/>
+        <circle cx="88.5" cy="74" r="3.1" fill="#000"/>
+        <circle cx="74" cy="88.5" r="3.1" fill="#000"/>
+        <circle cx="61.5" cy="65" r="3.1" fill="#000"/>
+        <circle cx="86" cy="88" r="3.1" fill="#000"/>
+      </mask>
+      <path fill="#F5B301" mask="url(#m-br)" d="M53 60 Q53 53 60 53 L93 53 Q100 53 100 60 L100 82 Q100 100 82 100 L60 100 Q53 100 53 93 Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- drawing-sheet frame -->
+<div class="sheet-frame" aria-hidden="true">
+  <span class="edge e-t"></span><span class="edge e-b"></span>
+  <span class="edge e-l"></span><span class="edge e-r"></span>
+  <span class="tick t-tl"></span><span class="tick t-tr"></span>
+  <span class="tick t-br"></span><span class="tick t-bl"></span>
+  <span class="cap cap-l">PT. Maju Bangun Sinergi — General Arrangement</span>
+  <span class="cap cap-r">Scale 1:1 — Rev A — 2026</span>
+  <span class="cap cap-b">majubangunsinergi.com</span>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-head" id="top">
+  <a class="brand" href="#top" aria-label="PT. Maju Bangun Sinergi — home">
+    <img class="logo" src="assets/logo.png" alt="" width="184" height="191">
+    <span class="brand-name">
+      <span class="nm">MAJU BANGUN SINERGI</span>
+      <span class="sub">PT&nbsp;·&nbsp;ENGINEERING&nbsp;·&nbsp;DESIGN&nbsp;·&nbsp;DIGITAL</span>
+    </span>
+  </a>
+  <nav aria-label="Primary">
+    <ul class="nav-links">
+      <li><a href="#about">Company</a></li>
+      <li><a href="#services">Capabilities</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a class="nav-cta" href="#contact">Start a project
+    <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7"/></svg>
+  </a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+  <ul>
+    <li><a href="#about"><span class="idx">01</span>Company</a></li>
+    <li><a href="#services"><span class="idx">02</span>Capabilities</a></li>
+    <li><a href="#approach"><span class="idx">03</span>Approach</a></li>
+    <li><a href="#contact"><span class="idx">04</span>Contact</a></li>
+  </ul>
+  <p class="mm-foot mono">PT. Maju Bangun Sinergi — est. 2023</p>
+</nav>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero hl-anim" id="hero" aria-label="Introduction">
+    <div class="hero-sky" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <canvas id="sky-far" aria-hidden="true"></canvas>
+    <canvas id="sky-mid" aria-hidden="true"></canvas>
+    <canvas id="sky-near" aria-hidden="true"></canvas>
+    <div class="hero-fade" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <p class="hero-tag mono"><span class="dash" aria-hidden="true"></span><span>SHT-00&nbsp;—&nbsp;COVER <b>·&nbsp;PT.&nbsp;MAJU BANGUN SINERGI</b><span class="tag-x"> ·&nbsp;EST.&nbsp;2023</span></span></p>
+      <h1 class="sr-only">Maju Bangun Sinergi — forward, build, synergy. Engineering, design and digital solutions from concept to handover.</h1>
+      <ul class="headline" aria-hidden="true">
+        <li><span class="word" lang="id">Maju</span><span class="gloss">/ma·ju/&nbsp;&nbsp;<b>forward</b></span></li>
+        <li><span class="word" lang="id">Bangun</span><span class="gloss">/ba·ngun/&nbsp;&nbsp;<b>to build</b></span></li>
+        <li><span class="word" lang="id">Sinergi</span><span class="gloss">/si·ner·gi/&nbsp;&nbsp;<b>synergy</b></span></li>
+      </ul>
+      <div class="hero-cols">
+        <p class="hero-lede">Our name is our method. <strong>PT.&nbsp;Maju Bangun Sinergi</strong> is a multidisciplinary engineering company — civil, mechanical &amp; electrical works, interior &amp; exterior design, and industrial digital systems — <strong>one team, accountable from first sketch to final&nbsp;handover.</strong></p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#contact">Start a project
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7"/></svg></a>
+          <a class="btn btn-ghost" href="#services">Explore capabilities</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div class="wrap">
+        <span class="mono">EST. <b>2023</b> — INDONESIA</span>
+        <span class="mono m-x">CIVIL · MEP · DESIGN · DIGITAL</span>
+        <span class="mono">SCOPE — <b>CONCEPT → HANDOVER</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MARQUEE ================= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <ul>
+        <li>Civil Engineering</li><li>Structural Design</li><li>Mechanical</li><li>Electrical</li>
+        <li>Interior Design</li><li>Exterior Works</li><li>Industrial Automation</li><li>Computer Vision</li>
+        <li>IT Solutions</li><li>Project Management</li><li>Construction Supervision</li><li>Detailed Engineering Design</li>
+      </ul>
+      <ul>
+        <li>Civil Engineering</li><li>Structural Design</li><li>Mechanical</li><li>Electrical</li>
+        <li>Interior Design</li><li>Exterior Works</li><li>Industrial Automation</li><li>Computer Vision</li>
+        <li>IT Solutions</li><li>Project Management</li><li>Construction Supervision</li><li>Detailed Engineering Design</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="about" id="about" aria-labelledby="about-h">
+    <div class="dim reveal" aria-hidden="true"><span class="rule"></span><span class="lab">SHT-01 — The Company</span><span class="rule"></span></div>
+    <div class="wrap" style="padding-top:clamp(48px,7vw,84px)">
+      <div class="about-grid">
+        <div class="about-copy">
+          <p class="mono reveal" style="margin-bottom:18px">GENERAL NOTES — READ WITH ALL SHEETS</p>
+          <h2 class="lede reveal" id="about-h">Most firms hand your project from office to office. We built a company where <em>the disciplines never separate.</em></h2>
+          <p class="reveal">Founded in 2023, MBS closes the gap between the drawing office, the construction site, and the server room. Engineers, designers, and software specialists work as a single team — so what gets designed can be built, and what gets built can be measured.</p>
+          <p class="reveal">From infrastructure development to industrial optimization and specialized engineering projects, we carry one line of accountability across the entire arc: conceptualization, detailed design, project management, and construction supervision.</p>
+          <div class="about-defs reveal">
+            <div class="def"><span class="w">Maju</span><span class="m"><b>forward</b> — we move projects, not paperwork</span></div>
+            <div class="def"><span class="w">Bangun</span><span class="m"><b>to build</b> — drawings that survive contact with site</span></div>
+            <div class="def"><span class="w">Sinergi</span><span class="m"><b>synergy</b> — every discipline at one table</span></div>
+          </div>
+        </div>
+        <div class="logo-plate reveal" aria-hidden="true">
+          <!-- the mark, annotated like a drawing detail -->
+          <svg class="plate-svg" viewBox="-70 -34 240 168">
+            <g style="color:var(--paper)">
+              <use href="#mbs-logo" width="100" height="100"/>
+            </g>
+            <!-- callouts -->
+            <g>
+              <circle class="callout-dot" cx="23" cy="-6" r="1.6"/>
+              <path class="callout-line" d="M23 -6 L23 -22 L-64 -22"/>
+              <text class="callout-txt" x="-64" y="-26">01 · Civil</text>
+              <circle class="callout-dot" cx="77" cy="-6" r="1.6"/>
+              <path class="callout-line" d="M77 -6 L77 -22 L166 -22" />
+              <text class="callout-txt" x="166" y="-26" text-anchor="end">02 · MEP</text>
+              <circle class="callout-dot" cx="23" cy="106" r="1.6"/>
+              <path class="callout-line" d="M23 106 L23 122 L-64 122"/>
+              <text class="callout-txt" x="-64" y="130">03 · Design</text>
+              <circle class="callout-dot" cx="77" cy="106" r="1.6"/>
+              <path class="callout-line" d="M77 106 L77 122 L166 122"/>
+              <text class="callout-txt" x="166" y="130" text-anchor="end">04 · Digital</text>
+              <!-- dimension line beside mark -->
+              <path class="callout-line" d="M112 0 L112 100"/>
+              <path class="callout-line" d="M108 0 L116 0 M108 100 L116 100"/>
+              <text class="callout-sub" x="120" y="46">4 pillars</text>
+              <text class="callout-sub" x="120" y="56">1 mark</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="services" id="services" aria-labelledby="services-h">
+    <div class="dim reveal" aria-hidden="true"><span class="rule"></span><span class="lab">SHT-02 — Capabilities</span><span class="rule"></span></div>
+    <div class="wrap" style="padding-top:clamp(48px,7vw,84px)">
+      <div class="sheet-head reveal">
+        <div class="sh-left">
+          <span class="mono">SCALE NTS · FOUR DISCIPLINES · ONE TEAM</span>
+          <h2 id="services-h">Four pillars.<br>One <em>contract.</em></h2>
+        </div>
+        <p class="sh-right sh-hint mono">HOVER TO INSPECT ↗</p>
+      </div>
+      <div class="svc-grid">
+
+        <article class="svc reveal">
+          <div class="det" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="det-lab">CIV — 0.98</span></div>
+          <div class="svc-top">
+            <span class="svc-code"><b>01</b> / CIV — CIVIL WORKS</span>
+            <span class="svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M4 38h40M8 38V22l16-10 16 10v16M16 38v-8h6v8M26 38v-8h6v8M24 12v-6"/><circle cx="24" cy="4.5" r="1.5"/>
+              </svg>
+            </span>
+          </div>
+          <h3>Civil &amp; Structural Engineering</h3>
+          <p>Feasibility, structural design, and site development for buildings and infrastructure — engineered against load, code, and time.</p>
+          <ul>
+            <li>Structural design &amp; analysis</li>
+            <li>Infrastructure &amp; site development</li>
+            <li>Feasibility studies &amp; permits</li>
+            <li>Construction supervision</li>
+          </ul>
+        </article>
+
+        <article class="svc reveal">
+          <div class="det" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="det-lab">MEP — 0.97</span></div>
+          <div class="svc-top">
+            <span class="svc-code"><b>02</b> / MEP — MECHANICAL · ELECTRICAL</span>
+            <span class="svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6">
+                <circle cx="18" cy="24" r="7"/><circle cx="18" cy="24" r="2.4"/>
+                <path d="M18 13.5V9M18 39v-4.5M28.5 24H33M3 24h4.5M25.4 16.6l3.2-3.2M7.4 34.6l3.2-3.2M25.4 31.4l3.2 3.2M7.4 13.4l3.2 3.2"/>
+                <path d="M36 6l-5 12h7l-6 14 2-10h-7z" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+          <h3>Mechanical &amp; Electrical</h3>
+          <p>Power, motion, and climate — MEP systems engineered for efficiency, sized for growth, and designed to be maintained.</p>
+          <ul>
+            <li>Mechanical &amp; piping systems</li>
+            <li>Electrical &amp; power distribution</li>
+            <li>HVAC &amp; utilities</li>
+            <li>Industrial installations</li>
+          </ul>
+        </article>
+
+        <article class="svc reveal">
+          <div class="det" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="det-lab">DES — 0.95</span></div>
+          <div class="svc-top">
+            <span class="svc-code"><b>03</b> / DES — INTERIOR · EXTERIOR</span>
+            <span class="svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="6" y="6" width="36" height="36"/><path d="M6 26h14v16M20 26 42 26" opacity=".9"/>
+                <path d="M20 26a10 10 0 0 0-10-10" stroke-dasharray="2.5 3"/><path d="M30 6v8M30 20v22" opacity=".5"/>
+              </svg>
+            </span>
+          </div>
+          <h3>Interior &amp; Exterior Design</h3>
+          <p>Spaces that work as well as they look — from concept boards and material palettes to build-out drawings and finishing on site.</p>
+          <ul>
+            <li>Space planning &amp; concept design</li>
+            <li>Interior build-out</li>
+            <li>Facade &amp; exterior works</li>
+            <li>Product &amp; furniture design</li>
+          </ul>
+        </article>
+
+        <article class="svc svc-amber reveal">
+          <div class="det" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="det-lab">DGT — 0.99</span></div>
+          <div class="svc-top">
+            <span class="svc-code"><b>04</b> / DGT — DIGITAL · AUTOMATION</span>
+            <span class="svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="12" y="12" width="24" height="24"/><path d="M20 20h8v8h-8z"/>
+                <path d="M4 12V4h8M36 4h8v8M44 36v8h-8M12 44H4v-8" stroke-width="1.8"/>
+              </svg>
+            </span>
+          </div>
+          <h3>Digital &amp; Automation</h3>
+          <p>The amber quadrant of our mark — automation, computer vision, and IT systems that make facilities observable and efficient.</p>
+          <ul>
+            <li>Industrial &amp; building automation</li>
+            <li>AI &amp; computer vision</li>
+            <li>IT infrastructure &amp; networks</li>
+            <li>Custom software &amp; dashboards</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= APPROACH ================= -->
+  <section class="approach" id="approach" aria-labelledby="approach-h">
+    <div class="dim reveal" aria-hidden="true"><span class="rule"></span><span class="lab">SHT-03 — Method Statement</span><span class="rule"></span></div>
+    <div class="wrap" style="padding-top:clamp(48px,7vw,84px)">
+      <div class="sheet-head reveal">
+        <div class="sh-left">
+          <span class="mono">TYPICAL SEQUENCE · NO PHASE SKIPPED</span>
+          <h2 id="approach-h">From first line<br>to <em>handover.</em></h2>
+        </div>
+        <p class="sh-right mono">PH-01 → PH-05 · END-TO-END</p>
+      </div>
+      <div class="phase-rail reveal">
+        <div class="phase">
+          <span class="ph-code">PH-01</span>
+          <h3>Conceptualization</h3>
+          <p>Site data, requirements, budget. We frame the problem before we draw the answer.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-code">PH-02</span>
+          <h3>Detailed Design</h3>
+          <p>Calculations, drawings, and specifications a contractor can actually build from.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-code">PH-03</span>
+          <h3>Project Management</h3>
+          <p>Schedule, procurement, and cost control — one accountable point of contact.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-code">PH-04</span>
+          <h3>Construction &amp; Supervision</h3>
+          <p>Execution with engineering-grade QA/QC on site, not after the fact.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-code">PH-05</span>
+          <h3>Handover &amp; Support</h3>
+          <p>As-builts, commissioning, and digital systems that keep working after we leave.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FACTS ================= -->
+  <section class="facts reveal" aria-label="Company facts">
+    <div class="wrap">
+      <div class="fact"><span class="k">Founded</span><span class="v"><em>2023</em></span></div>
+      <div class="fact"><span class="k">Disciplines</span><span class="v">CIV · MEP<br>DES · DGT</span></div>
+      <div class="fact"><span class="k">Delivery</span><span class="v">End-to-<em>end</em></span></div>
+      <div class="fact"><span class="k">Base</span><span class="v">Depok, <em>ID</em></span></div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="cta-band" aria-labelledby="cta-h">
+    <div class="halo" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="mono reveal">SHT-04 · ISSUED FOR CONSTRUCTION</span>
+      <h2 id="cta-h" class="reveal">Put it on <em>paper.</em></h2>
+      <p class="reveal">Tell us what you're building. We'll bring the drawings, the site team, and the software.</p>
+      <div class="hero-actions reveal" style="justify-content:center">
+        <a class="btn btn-solid" href="#contact">Start the conversation
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7"/></svg></a>
+        <a class="btn btn-ghost" href="https://wa.me/6285280448499">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <div class="dim reveal" aria-hidden="true"><span class="rule"></span><span class="lab">SHT-05 — Title Block</span><span class="rule"></span></div>
+    <div class="wrap" style="padding-top:clamp(48px,7vw,84px)">
+      <div class="tblock reveal">
+        <div class="tb-form">
+          <h3 id="contact-h">Open a project file</h3>
+          <p class="hint">A few lines is enough — scope, site, and timeline. We reply with a first read and next steps.</p>
+          <form id="inquiry">
+            <div class="f-row">
+              <div class="field">
+                <label for="f-name">Name</label>
+                <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+              </div>
+              <div class="field">
+                <label for="f-org">Company</label>
+                <input id="f-org" name="org" type="text" autocomplete="organization" placeholder="Company / institution">
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-mail">E-mail</label>
+              <input id="f-mail" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+            </div>
+            <div class="field">
+              <label for="f-msg">Project brief</label>
+              <textarea id="f-msg" name="message" placeholder="What are we building? Scope, location, timeline…" required></textarea>
+            </div>
+            <button class="btn btn-solid" type="submit">Send inquiry
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7"/></svg></button>
+            <p class="form-note">SUBMITTING OPENS YOUR E-MAIL APP — NOTHING IS STORED ON THIS PAGE.</p>
+          </form>
+        </div>
+        <div class="tb-info">
+          <div class="tb-cell"><span class="k">Document</span><span class="v mono-v">INQ-01 — PROJECT INQUIRY</span></div>
+          <div class="tb-cell"><span class="k">Company</span><span class="v">PT. Maju Bangun Sinergi</span></div>
+          <div class="tb-cell"><span class="k">E-mail</span><a class="v mono-v" href="mailto:sales@majubangunsinergi.com">sales@majubangunsinergi.com</a></div>
+          <div class="tb-cell"><span class="k">WhatsApp</span><a class="v mono-v" href="https://wa.me/6285280448499">+62 852-8044-8499</a></div>
+          <div class="tb-cell"><span class="k">Office</span><span class="v" style="font-size:14px;line-height:1.55;font-weight:450">Jl. Raffles Hills Boulevard No. 23,<br>Sukatani, Kec. Tapos, Kota Depok</span></div>
+          <div class="tb-cell"><span class="k">Web</span><a class="v mono-v" href="https://majubangunsinergi.com">majubangunsinergi.com</a></div>
+          <div class="tb-fill" aria-hidden="true"></div>
+          <div class="tb-cell tb-stamp">
+            <img class="logo" src="assets/logo.png" alt="" width="184" height="191">
+            <span class="st-txt">SHEET 05 OF 05<br>REV A — 2026<br>SCALE 1:1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-brand">
+      <img class="logo" src="assets/logo.png" alt="" width="184" height="191">
+      <span class="mono">© 2026 PT. MAJU BANGUN SINERGI<br>ENGINEERING WITH PRECISION — DESIGN WITH PASSION</span>
+    </div>
+    <ul class="foot-links">
+      <li><a href="#about">Company</a></li>
+      <li><a href="#services">Capabilities</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#top">Back to top ↑</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- header state ---------- */
+  var head = document.querySelector(".site-head");
+  function onScrollHead(){ head.classList.toggle("scrolled", window.scrollY > 40); }
+  window.addEventListener("scroll", onScrollHead, {passive:true});
+  onScrollHead();
+
+  /* ---------- mobile menu (focus-managed) ---------- */
+  var mbtn = document.querySelector(".menu-btn");
+  var mmenu = document.getElementById("mobile-menu");
+  var pageRegions = [document.querySelector("main"), document.querySelector(".site-foot")];
+  function setMenu(open){
+    mmenu.classList.toggle("open", open);
+    mbtn.setAttribute("aria-expanded", String(open));
+    mbtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.body.style.overflow = open ? "hidden" : "";
+    pageRegions.forEach(function(r){
+      if(!r) return;
+      if(open) r.setAttribute("inert","");
+      else r.removeAttribute("inert");
+    });
+    if(open){ var first = mmenu.querySelector("a"); if(first) first.focus(); }
+  }
+  mbtn.addEventListener("click", function(){ setMenu(!mmenu.classList.contains("open")); });
+  mmenu.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", function(){ setMenu(false); }); });
+  document.addEventListener("keydown", function(e){
+    if(!mmenu.classList.contains("open")) return;
+    if(e.key === "Escape"){ setMenu(false); mbtn.focus(); return; }
+    if(e.key === "Tab"){
+      var items = [mbtn].concat(Array.prototype.slice.call(mmenu.querySelectorAll("a")));
+      var i = items.indexOf(document.activeElement);
+      if(e.shiftKey && i <= 0){ e.preventDefault(); items[items.length - 1].focus(); }
+      else if(!e.shiftKey && (i === items.length - 1 || i === -1)){ e.preventDefault(); items[0].focus(); }
+    }
+  });
+
+  /* ---------- reveal on scroll (guarded — content must never stay hidden) ---------- */
+  function revealAll(){ document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); }); }
+  try{
+    if("IntersectionObserver" in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+        });
+      }, {threshold:.12, rootMargin:"0px 0px -8% 0px"});
+      document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+    }else{
+      revealAll();
+    }
+  }catch(err){ revealAll(); }
+
+  /* ---------- contact form → mailto ---------- */
+  var form = document.getElementById("inquiry");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = form.name.value.trim(), org = form.org.value.trim(),
+        mail = form.email.value.trim(), msg = form.message.value.trim();
+    var subject = "Project inquiry — " + name + (org ? " (" + org + ")" : "");
+    var body = "Name: " + name + "\nCompany: " + (org||"-") + "\nE-mail: " + mail + "\n\nBrief:\n" + msg;
+    window.location.href = "mailto:sales@majubangunsinergi.com?subject=" +
+      encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  });
+
+  /* ============================================================
+     GENERATIVE NIGHT SKYLINE — three parallax canvas layers
+     (wrapped in try/catch: a canvas failure must not take the
+      rest of the page's behavior down with it)
+     ============================================================ */
+  try{
+  function mulberry32(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  var hero = document.getElementById("hero");
+  var layers = [
+    {cv:document.getElementById("sky-far"),  seed:11, n:26, minH:.16, maxH:.42, minW:26, maxW:64,  fill:"#232B3D", win:null,        density:0,   stars:true },
+    {cv:document.getElementById("sky-mid"),  seed:23, n:17, minH:.22, maxH:.66, minW:38, maxW:92,  fill:"#161C29", win:"#C9D4E8",   density:.30, stars:false},
+    {cv:document.getElementById("sky-near"), seed:37, n:11, minH:.30, maxH:.88, minW:56, maxW:130, fill:"#080A10", win:"#DCE6F5",   density:.38, stars:false, crane:true}
+  ];
+  var flickers = [];   // {ctx,x,y,w,h,color,alpha,bg}
+  var beacons  = [];   // {ctx,x,y,r}
+
+  function drawBuilding(ctx, rnd, x, w, h, H, L){
+    var top = H - h;
+    // stepped "setback" tops on some towers
+    var steps = rnd() < .28 ? 1 + Math.floor(rnd()*2) : 0;
+    ctx.fillStyle = L.fill;
+    ctx.fillRect(x, top, w, h);
+    var sw = w, st = top;
+    for(var s=0; s<steps; s++){
+      sw = sw * (.55 + rnd()*.2);
+      var sh = h * (.06 + rnd()*.08);
+      st -= sh;
+      ctx.fillRect(x + (w-sw)/2, st, sw, sh);
+    }
+    // antenna / spire — beacons only on the near layer, where the mast is visible
+    if(rnd() < .22){
+      var ax = x + w/2;
+      var ah = 14 + rnd()*30;
+      ctx.fillRect(ax - .7, st - ah, 1.4, ah);
+      if(L.crane && rnd() < .6){
+        beacons.push({ctx:ctx, x:ax, y:st - ah - 3, r:1.6});
+      }
+    }
+    // windows
+    if(L.win && h > 26){
+      var cell = 7.5, rows = Math.floor((h-8)/cell), cols = Math.floor((w-6)/cell);
+      var litness = .35 + rnd()*.65;
+      for(var r=0;r<rows;r++){
+        for(var c=0;c<cols;c++){
+          if(rnd() < L.density * litness){
+            var amber = rnd() < .14;
+            var alpha = .16 + rnd()*.6;
+            var wx = x + 4 + c*cell, wy = top + 5 + r*cell;
+            ctx.fillStyle = amber ? "rgba(245,179,1," + (alpha*.95).toFixed(2) + ")"
+                                  : "rgba(201,212,232," + (alpha*.55).toFixed(2) + ")";
+            ctx.fillRect(wx, wy, 3.1, 4.2);
+            if(flickers.length < 46 && rnd() < .06){
+              flickers.push({ctx:ctx, x:wx, y:wy, w:3.1, h:4.2, amber:amber, bg:L.fill, on:true});
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function drawCrane(ctx, W, H){
+    var bx = W * .76, baseY = H, mastH = H * .78, jib = 120, cjib = 44;
+    var topY = baseY - mastH;
+    ctx.strokeStyle = "#05070B";
+    ctx.fillStyle = "#05070B";
+    ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(bx, baseY); ctx.lineTo(bx, topY); ctx.stroke();
+    // lattice
+    ctx.lineWidth = 1;
+    for(var y=baseY; y>topY; y-=12){
+      ctx.beginPath(); ctx.moveTo(bx-3.5, y); ctx.lineTo(bx+3.5, y-12); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(bx+3.5, y); ctx.lineTo(bx-3.5, y-12); ctx.stroke();
+    }
+    ctx.lineWidth = 2.5;
+    // jib + counter-jib
+    ctx.beginPath(); ctx.moveTo(bx - cjib, topY); ctx.lineTo(bx + jib, topY); ctx.stroke();
+    // apex + tie lines
+    ctx.beginPath(); ctx.moveTo(bx, topY - 18); ctx.lineTo(bx + jib, topY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(bx, topY - 18); ctx.lineTo(bx - cjib, topY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(bx, topY - 18); ctx.lineTo(bx, topY); ctx.stroke();
+    // counterweight
+    ctx.fillRect(bx - cjib - 4, topY, 12, 9);
+    // trolley + hook line + hook
+    var tx = bx + jib * .72;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(tx, topY); ctx.lineTo(tx, topY + mastH * .34); ctx.stroke();
+    ctx.fillRect(tx - 2.5, topY + mastH * .34, 5, 4);
+    beacons.push({ctx:ctx, x:bx, y:topY - 23, r:1.8});
+  }
+
+  function paintLayer(L){
+    var cv = L.cv, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = hero.clientWidth, H = cv.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    var ctx = cv.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    var rnd = mulberry32(L.seed);
+
+    if(L.stars){
+      for(var i=0;i<90;i++){
+        var sx = rnd()*W, sy = rnd()*H*.5, sa = rnd()*.5 + .08;
+        ctx.fillStyle = "rgba(201,212,232," + sa.toFixed(2) + ")";
+        ctx.fillRect(sx, sy, 1, 1);
+      }
+    }
+    var x = -20;
+    while(x < W + 20){
+      var w = L.minW + rnd()*(L.maxW - L.minW);
+      var h = (L.minH + rnd()*(L.maxH - L.minH)) * H;
+      drawBuilding(ctx, rnd, x, w, h, H, L);
+      x += w + 2 + rnd()*26;
+    }
+    if(L.crane) drawCrane(ctx, W, H);
+  }
+
+  function paintAll(){
+    flickers.length = 0; beacons.length = 0;
+    layers.forEach(paintLayer);
+  }
+  paintAll();
+  var rsT;
+  window.addEventListener("resize", function(){ clearTimeout(rsT); rsT = setTimeout(paintAll, 180); });
+
+  /* ---------- ambient animation: flicker + beacons ----------
+     The rAF loop only runs while the hero is on screen. */
+  if(!reduceMotion){
+    var rafId = null, lastFlick = 0, beaconPhase = 0, lastBeacon = 0;
+    function tick(t){
+      if(t - lastFlick > 380){
+        lastFlick = t;
+        for(var k=0;k<2;k++){
+          var f = flickers[Math.floor(Math.random()*flickers.length)];
+          if(f){
+            f.on = !f.on;
+            f.ctx.fillStyle = f.bg;
+            f.ctx.fillRect(f.x - .5, f.y - .5, f.w + 1, f.h + 1);
+            if(f.on){
+              f.ctx.fillStyle = f.amber ? "rgba(245,179,1,.85)" : "rgba(201,212,232,.5)";
+              f.ctx.fillRect(f.x, f.y, f.w, f.h);
+            }
+          }
+        }
+      }
+      if(t - lastBeacon > 1150){
+        lastBeacon = t; beaconPhase = 1 - beaconPhase;
+        beacons.forEach(function(b, i){
+          var on = (i % 2 === 0) === !!beaconPhase;
+          b.ctx.clearRect(b.x - b.r - 1, b.y - b.r - 1, (b.r + 1) * 2, (b.r + 1) * 2);
+          if(on){
+            b.ctx.fillStyle = "rgba(245,179,1,.95)";
+            b.ctx.beginPath(); b.ctx.arc(b.x, b.y, b.r, 0, 6.2832); b.ctx.fill();
+          }
+        });
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+    function startLoop(){ if(rafId === null) rafId = requestAnimationFrame(tick); }
+    function stopLoop(){ if(rafId !== null){ cancelAnimationFrame(rafId); rafId = null; } }
+    if("IntersectionObserver" in window){
+      new IntersectionObserver(function(en){
+        if(en[0].isIntersecting) startLoop(); else stopLoop();
+      }).observe(hero);
+    }else{
+      startLoop();
+    }
+
+    /* ---------- parallax ---------- */
+    var ticking = false;
+    window.addEventListener("scroll", function(){
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        var y = window.scrollY;
+        if(y < window.innerHeight * 1.2){
+          layers[0].cv.style.transform = "translateY(" + (y * .10) + "px)";
+          layers[1].cv.style.transform = "translateY(" + (y * .05) + "px)";
+          layers[2].cv.style.transform = "translateY(" + (y * .02) + "px)";
+        }
+        ticking = false;
+      });
+    }, {passive:true});
+  }
+
+  }catch(err){ /* the skyline is decorative — never fatal */ }
+
+  /* ---------- hero entrance ---------- */
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    document.getElementById("hero").classList.add("loaded");
+  }); });
+})();
+</script>
+</body>
+</html>
