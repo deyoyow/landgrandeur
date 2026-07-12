@@ -32,7 +32,15 @@
   "foundingDate": "2023",
   "description": "Multidisciplinary engineering company: civil, mechanical and electrical engineering, interior and exterior design, and industrial digital solutions.",
   "logo": "https://majubangunsinergi.com/assets/logo-512.png",
-  "address": { "@type": "PostalAddress", "addressCountry": "ID" }
+  "email": "sales@majubangunsinergi.com",
+  "telephone": "+6285280448499",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Jl. Raffles Hills Boulevard No. 23, Sukatani, Kec. Tapos",
+    "addressLocality": "Depok",
+    "addressRegion": "Jawa Barat",
+    "addressCountry": "ID"
+  }
 }
 </script>
 <style>
@@ -164,7 +172,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   padding-top:12px;padding-bottom:12px;
 }
 .brand{display:flex;align-items:center;gap:14px;min-width:0}
-.brand .logo{width:42px;height:42px;flex:none}
+.brand .logo{height:42px;width:auto;flex:none}
 .brand-name{display:flex;flex-direction:column;gap:2px;line-height:1}
 .brand-name .nm{
   font-weight:750;font-stretch:118%;font-size:13.5px;letter-spacing:.1em;
@@ -577,7 +585,7 @@ section{position:relative}
   background:repeating-linear-gradient(45deg,transparent 0 9px,var(--line-soft) 9px 10px);
 }
 .tb-stamp{display:flex;align-items:center;gap:14px;padding:22px clamp(20px,2.6vw,32px)}
-.tb-stamp .logo{width:52px;height:52px;flex:none}
+.tb-stamp .logo{height:54px;width:auto;flex:none}
 .tb-stamp .st-txt{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.18em;color:var(--zinc-dim);text-transform:uppercase;line-height:1.8}
 @media (max-width:900px){
   .tblock{grid-template-columns:1fr}
@@ -591,7 +599,7 @@ section{position:relative}
 .site-foot{border-top:1px solid var(--line);padding:34px 0 calc(26px + var(--frame))}
 .site-foot .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .foot-brand{display:flex;align-items:center;gap:12px}
-.foot-brand .logo{width:30px;height:30px}
+.foot-brand .logo{height:34px;width:auto}
 .foot-links{display:flex;gap:26px;list-style:none;flex-wrap:wrap}
 .foot-links a{
   font-family:var(--font-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--zinc-dim);
@@ -680,7 +688,7 @@ section{position:relative}
 
 <header class="site-head" id="top">
   <a class="brand" href="#top" aria-label="PT. Maju Bangun Sinergi — home">
-    <svg class="logo" style="color:var(--paper)" aria-hidden="true"><use href="#mbs-logo"/></svg>
+    <img class="logo" src="assets/logo.png" alt="" width="184" height="191">
     <span class="brand-name">
       <span class="nm">MAJU BANGUN SINERGI</span>
       <span class="sub">PT&nbsp;·&nbsp;ENGINEERING&nbsp;·&nbsp;DESIGN&nbsp;·&nbsp;DIGITAL</span>
@@ -885,7 +893,7 @@ section{position:relative}
             <li>Space planning &amp; concept design</li>
             <li>Interior build-out</li>
             <li>Facade &amp; exterior works</li>
-            <li>Material &amp; lighting specification</li>
+            <li>Product &amp; furniture design</li>
           </ul>
         </article>
 
@@ -903,8 +911,8 @@ section{position:relative}
           <h3>Digital &amp; Automation</h3>
           <p>The amber quadrant of our mark — automation, computer vision, and IT systems that make facilities observable and efficient.</p>
           <ul>
-            <li>Industrial automation &amp; control</li>
-            <li>Computer vision &amp; monitoring</li>
+            <li>Industrial &amp; building automation</li>
+            <li>AI &amp; computer vision</li>
             <li>IT infrastructure &amp; networks</li>
             <li>Custom software &amp; dashboards</li>
           </ul>
@@ -961,7 +969,7 @@ section{position:relative}
       <div class="fact"><span class="k">Founded</span><span class="v"><em>2023</em></span></div>
       <div class="fact"><span class="k">Disciplines</span><span class="v">CIV · MEP<br>DES · DGT</span></div>
       <div class="fact"><span class="k">Delivery</span><span class="v">End-to-<em>end</em></span></div>
-      <div class="fact"><span class="k">Base</span><span class="v">Indonesia</span></div>
+      <div class="fact"><span class="k">Base</span><span class="v">Depok, <em>ID</em></span></div>
     </div>
   </section>
 
@@ -972,8 +980,11 @@ section{position:relative}
       <span class="mono reveal">SHT-04 · ISSUED FOR CONSTRUCTION</span>
       <h2 id="cta-h" class="reveal">Put it on <em>paper.</em></h2>
       <p class="reveal">Tell us what you're building. We'll bring the drawings, the site team, and the software.</p>
-      <a class="btn btn-solid reveal" href="#contact">Start the conversation
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7"/></svg></a>
+      <div class="hero-actions reveal" style="justify-content:center">
+        <a class="btn btn-solid" href="#contact">Start the conversation
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7"/></svg></a>
+        <a class="btn btn-ghost" href="https://wa.me/6285280448499">Chat on WhatsApp</a>
+      </div>
     </div>
   </section>
 
@@ -985,8 +996,6 @@ section{position:relative}
         <div class="tb-form">
           <h3 id="contact-h">Open a project file</h3>
           <p class="hint">A few lines is enough — scope, site, and timeline. We reply with a first read and next steps.</p>
-          <!-- TODO: point this form at your real inbox / form endpoint.
-               It currently opens the visitor's e-mail app addressed to info@majubangunsinergi.com -->
           <form id="inquiry">
             <div class="f-row">
               <div class="field">
@@ -1014,12 +1023,13 @@ section{position:relative}
         <div class="tb-info">
           <div class="tb-cell"><span class="k">Document</span><span class="v mono-v">INQ-01 — PROJECT INQUIRY</span></div>
           <div class="tb-cell"><span class="k">Company</span><span class="v">PT. Maju Bangun Sinergi</span></div>
-          <div class="tb-cell"><span class="k">E-mail</span><a class="v mono-v" href="mailto:info@majubangunsinergi.com">info@majubangunsinergi.com</a></div>
+          <div class="tb-cell"><span class="k">E-mail</span><a class="v mono-v" href="mailto:sales@majubangunsinergi.com">sales@majubangunsinergi.com</a></div>
+          <div class="tb-cell"><span class="k">WhatsApp</span><a class="v mono-v" href="https://wa.me/6285280448499">+62 852-8044-8499</a></div>
+          <div class="tb-cell"><span class="k">Office</span><span class="v" style="font-size:14px;line-height:1.55;font-weight:450">Jl. Raffles Hills Boulevard No. 23,<br>Sukatani, Kec. Tapos, Kota Depok</span></div>
           <div class="tb-cell"><span class="k">Web</span><a class="v mono-v" href="https://majubangunsinergi.com">majubangunsinergi.com</a></div>
-          <div class="tb-cell"><span class="k">Base</span><span class="v">Indonesia</span></div>
           <div class="tb-fill" aria-hidden="true"></div>
           <div class="tb-cell tb-stamp">
-            <svg class="logo" style="color:var(--paper)" aria-hidden="true"><use href="#mbs-logo"/></svg>
+            <img class="logo" src="assets/logo.png" alt="" width="184" height="191">
             <span class="st-txt">SHEET 05 OF 05<br>REV A — 2026<br>SCALE 1:1</span>
           </div>
         </div>
@@ -1032,8 +1042,8 @@ section{position:relative}
 <footer class="site-foot">
   <div class="wrap">
     <div class="foot-brand">
-      <svg class="logo" style="color:var(--paper)" aria-hidden="true"><use href="#mbs-logo"/></svg>
-      <span class="mono">© 2026 PT. MAJU BANGUN SINERGI</span>
+      <img class="logo" src="assets/logo.png" alt="" width="184" height="191">
+      <span class="mono">© 2026 PT. MAJU BANGUN SINERGI<br>ENGINEERING WITH PRECISION — DESIGN WITH PASSION</span>
     </div>
     <ul class="foot-links">
       <li><a href="#about">Company</a></li>
@@ -1108,7 +1118,7 @@ section{position:relative}
         mail = form.email.value.trim(), msg = form.message.value.trim();
     var subject = "Project inquiry — " + name + (org ? " (" + org + ")" : "");
     var body = "Name: " + name + "\nCompany: " + (org||"-") + "\nE-mail: " + mail + "\n\nBrief:\n" + msg;
-    window.location.href = "mailto:info@majubangunsinergi.com?subject=" +
+    window.location.href = "mailto:sales@majubangunsinergi.com?subject=" +
       encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   });
 
